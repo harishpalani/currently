@@ -55,7 +55,7 @@ public class DailyForecastActivity extends Activity {
                 String message = String.format("%s | Highs of %s degrees and %s",
                         dayOfWeek.toUpperCase(), maxTemp, summary);
                 Snackbar.make(mRelativeLayout, message, Snackbar.LENGTH_INDEFINITE).show();
-                // Toast.makeText(DailyForecastActivity.this, message, Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(DailyForecastActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
 
