@@ -24,7 +24,7 @@ import android.view.View;
 import com.hp.currently.R;
 import com.hp.currently.ui.messages.NetworkDialogFragment;
 
-public class FirstTimeActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
+public class FirstTimeActivity extends AppCompatActivity {
 
     public static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 1;
 
@@ -46,6 +46,13 @@ public class FirstTimeActivity extends AppCompatActivity implements ActivityComp
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        checkPermissions();
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -57,7 +64,7 @@ public class FirstTimeActivity extends AppCompatActivity implements ActivityComp
 
                     // permission was granted, yay!
                     Log.d(FirstTimeActivity.class.getSimpleName(), "DEBUG: onRequestPermissionsResult() got called!");
-                    startMainActivity();
+                    checkLocationServices();
 
                 } else {
 
@@ -88,6 +95,7 @@ public class FirstTimeActivity extends AppCompatActivity implements ActivityComp
         }
     }
 
+
     // Helper methods
     private void checkPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -117,6 +125,8 @@ public class FirstTimeActivity extends AppCompatActivity implements ActivityComp
 
     private void startMainActivity() {
         Intent intent = new Intent(FirstTimeActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
